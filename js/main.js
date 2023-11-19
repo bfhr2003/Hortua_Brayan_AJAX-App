@@ -1,13 +1,13 @@
 (() => {
 
     //variables
-  const model = document.querySelector("#model");
-  const hotspots = document.querySelectorAll(".Hotspot");
+    const model = document.querySelector("#model");
+    const hotspots = document.querySelectorAll(".Hotspot");
 
-  const materialTemplate = document.querySelector("#material-template");
-  const materialList = document.querySelector("#material-list");
+    const materialTemplate = document.querySelector("#material-template");
+    const materialList = document.querySelector("#material-list");
 
-  const spinnerLoader = `<svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_EUy1{animation:spinner_grm3 1.2s infinite}.spinner_f6oS{animation-delay:.1s}.spinner_g3nX{animation-delay:.2s}.spinner_nvEs{animation-delay:.3s}.spinner_MaNM{animation-delay:.4s}.spinner_4nle{animation-delay:.5s}.spinner_ZETM{animation-delay:.6s}.spinner_HXuO{animation-delay:.7s}.spinner_YaQo{animation-delay:.8s}.spinner_GOx1{animation-delay:.9s}.spinner_4vv9{animation-delay:1s}.spinner_NTs9{animation-delay:1.1s}.spinner_auJJ{transform-origin:center;animation:spinner_T3O6 6s linear infinite}@keyframes spinner_grm3{0%,50%{animation-timing-function:cubic-bezier(.27,.42,.37,.99);r:1px}25%{animation-timing-function:cubic-bezier(.53,0,.61,.73);r:2px}}@keyframes spinner_T3O6{0%{transform:rotate(360deg)}100%{transform:rotate(0deg)}}</style><g class="spinner_auJJ"><circle class="spinner_EUy1" cx="12" cy="3" r="1"/><circle class="spinner_EUy1 spinner_f6oS" cx="16.50" cy="4.21" r="1"/><circle class="spinner_EUy1 spinner_NTs9" cx="7.50" cy="4.21" r="1"/><circle class="spinner_EUy1 spinner_g3nX" cx="19.79" cy="7.50" r="1"/><circle class="spinner_EUy1 spinner_4vv9" cx="4.21" cy="7.50" r="1"/><circle class="spinner_EUy1 spinner_nvEs" cx="21.00" cy="12.00" r="1"/><circle class="spinner_EUy1 spinner_GOx1" cx="3.00" cy="12.00" r="1"/><circle class="spinner_EUy1 spinner_MaNM" cx="19.79" cy="16.50" r="1"/><circle class="spinner_EUy1 spinner_YaQo" cx="4.21" cy="16.50" r="1"/><circle class="spinner_EUy1 spinner_4nle" cx="16.50" cy="19.79" r="1"/><circle class="spinner_EUy1 spinner_HXuO" cx="7.50" cy="19.79" r="1"/><circle class="spinner_EUy1 spinner_ZETM" cx="12" cy="21" r="1"/></g></svg>`;
+    const spinnerLoader = `<svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_EUy1{animation:spinner_grm3 1.2s infinite}.spinner_f6oS{animation-delay:.1s}.spinner_g3nX{animation-delay:.2s}.spinner_nvEs{animation-delay:.3s}.spinner_MaNM{animation-delay:.4s}.spinner_4nle{animation-delay:.5s}.spinner_ZETM{animation-delay:.6s}.spinner_HXuO{animation-delay:.7s}.spinner_YaQo{animation-delay:.8s}.spinner_GOx1{animation-delay:.9s}.spinner_4vv9{animation-delay:1s}.spinner_NTs9{animation-delay:1.1s}.spinner_auJJ{transform-origin:center;animation:spinner_T3O6 6s linear infinite}@keyframes spinner_grm3{0%,50%{animation-timing-function:cubic-bezier(.27,.42,.37,.99);r:1px}25%{animation-timing-function:cubic-bezier(.53,0,.61,.73);r:2px}}@keyframes spinner_T3O6{0%{transform:rotate(360deg)}100%{transform:rotate(0deg)}}</style><g class="spinner_auJJ"><circle class="spinner_EUy1" cx="12" cy="3" r="1"/><circle class="spinner_EUy1 spinner_f6oS" cx="16.50" cy="4.21" r="1"/><circle class="spinner_EUy1 spinner_NTs9" cx="7.50" cy="4.21" r="1"/><circle class="spinner_EUy1 spinner_g3nX" cx="19.79" cy="7.50" r="1"/><circle class="spinner_EUy1 spinner_4vv9" cx="4.21" cy="7.50" r="1"/><circle class="spinner_EUy1 spinner_nvEs" cx="21.00" cy="12.00" r="1"/><circle class="spinner_EUy1 spinner_GOx1" cx="3.00" cy="12.00" r="1"/><circle class="spinner_EUy1 spinner_MaNM" cx="19.79" cy="16.50" r="1"/><circle class="spinner_EUy1 spinner_YaQo" cx="4.21" cy="16.50" r="1"/><circle class="spinner_EUy1 spinner_4nle" cx="16.50" cy="19.79" r="1"/><circle class="spinner_EUy1 spinner_HXuO" cx="7.50" cy="19.79" r="1"/><circle class="spinner_EUy1 spinner_ZETM" cx="12" cy="21" r="1"/></g></svg>`;
 
   //This information needs to be removed then pulled with an AJAX Call using the Fetch API
   //this is the api url https://swiftpixel.com/earbud/api/infoboxes"
@@ -62,92 +62,129 @@
   // ];
 
   //functions
-  function modelLoaded() {
-    // model.innerHTML = spinner;
-    hotspots.forEach(hotspot => {
-      hotspot.style.display = "block";
-    });
-    // model.innerHTML = "";
-    // model.appendChild(hotspots);
-  }
-
-  function loadInfoBoxes() {
-    // use this url https://swiftpixel.com/earbud/api/infoboxes"
-    //the forEach loop will go inside a then()/promise
-    //make AJAX call here
-    // model.innerHTML = spinner;
-
-    function getData() {
-      // model.innerHTML = spinner;
-      let spinner = document.createElement('div');
-      spinner.innerHTML = spinnerLoader;
-      spinner.id = 'spinner';
-      spinner.className = 'spinner';
-
-      model.appendChild(spinner);
-
-      fetch("https://swiftpixel.com/earbud/api/infoboxes")
-      .then(response => response.json())
-      .then(infoBoxes => {
-        console.log(infoBoxes);
-
-
-        infoBoxes.forEach((infoBox,index)=>{
-
-          spinner.remove();
-
-          let selected = document.querySelector(`#hotspot-${index+1}`);
-            const h2 = document.createElement('h2');
-            h2.textContent = `${infoBox.heading}`;
-
-            const p = document.createElement('p');
-            p.textContent = infoBox.description;
-            
-            const img = document.createElement('img');
-            img.src = `./images/${infoBox.thumbnail}`;
-            img.alt = infoBox.heading;
-            console.log(img);
-    
-            console.log(selected);
-            console.log(infoBox.heading);
-            console.log(infoBox.description);
-    
-            selected.appendChild(h2);
-            selected.appendChild(p);
-            selected.appendChild(img);
+    function modelLoaded() {
+        // model.innerHTML = spinner;
+        hotspots.forEach(hotspot => {
+        hotspot.style.display = "block";
         });
         // model.innerHTML = "";
-      })
-      .catch(error => {
-        // Remove the spinner and show an error message
-        spinner.remove();
-        console.error("An error occurred while loading the data for the 3D object:",error);
-        alert('An error occurred while loading the data for the 3D object. Please try again later.');
-      });
+        // model.appendChild(hotspots);
     }
-    getData();
-  }
-  loadInfoBoxes();
+
+    function loadInfoBoxes() {
+        // use this url https://swiftpixel.com/earbud/api/infoboxes"
+        //the forEach loop will go inside a then()/promise
+        //make AJAX call here
+        // model.innerHTML = spinner;
+
+            function getData() {
+            // model.innerHTML = spinner;
+            let spinner = document.createElement('div');
+            spinner.innerHTML = spinnerLoader;
+            spinner.id = 'spinner';
+            spinner.className = 'spinner';
+
+            model.appendChild(spinner);
+
+            fetch("https://swiftpixel.com/earbud/api/infoboxes")
+            .then(response => response.json())
+            .then(infoBoxes => {
+                console.log(infoBoxes);
 
 
+                infoBoxes.forEach((infoBox,index)=>{
+
+                spinner.remove();
+
+                let selected = document.querySelector(`#hotspot-${index+1}`);
+                    const h2 = document.createElement('h2');
+                    h2.textContent = `${infoBox.heading}`;
+
+                    const p = document.createElement('p');
+                    p.textContent = infoBox.description;
+                    
+                    const img = document.createElement('img');
+                    img.src = `./images/${infoBox.thumbnail}`;
+                    img.alt = infoBox.heading;
+                    console.log(img);
+            
+                    console.log(selected);
+                    console.log(infoBox.heading);
+                    console.log(infoBox.description);
+            
+                    selected.appendChild(h2);
+                    selected.appendChild(p);
+                    selected.appendChild(img);
+                });
+                // model.innerHTML = "";
+            })
+            .catch(error => {
+                // Remove the spinner and show an error message
+                spinner.remove();
+                console.error("An error occurred while loading the data for the 3D object:",error);
+                alert('An error occurred while loading the data for the 3D object. Please try again later.');
+            });
+            }
+            getData();
+        }
+        loadInfoBoxes();
 
 
-  function showInfo() {
-    let selected = document.querySelector(`#${this.slot}`);
-    gsap.to(selected, 1, { autoAlpha: 1 });
-  }
+    function loadMaterialInfo() {
+        //make AJAX call here
+        // use this url https://swiftpixel.com/earbud/api/materials"
+        //the forEach loop will go inside a then()/promise
+        function getData() {
+        // materialList.innerHTML = spinner;
+            fetch("https://swiftpixel.com/earbud/api/materials")
+            .then(response => response.json())
+            .then(materials => {
+                console.log(materials);
 
-  function hideInfo() {
-    let selected = document.querySelector(`#${this.slot}`);
-    gsap.to(selected, 1, { autoAlpha: 0 });
-  }
+                materials.forEach(material =>{
+                //clone the template
+                const clone = materialTemplate.content.cloneNode(true);
+                //populate the clone template
+                const materialHeading = clone.querySelector(".material-heading");
+                materialHeading.textContent = material.heading;
+            
+                const materialDescription = clone.querySelector(".material-description");
+                materialDescription.textContent = material.description;
 
-  //Event listeners
-  model.addEventListener("load", modelLoaded);
+                materialList.appendChild(clone);
+            });
 
-  hotspots.forEach(function (hotspot) {
-    hotspot.addEventListener("mouseenter", showInfo);
-    hotspot.addEventListener("mouseleave", hideInfo);
-  });
-  
+            //append the populated template to the list
+            // materialList.innerHTML = "";
+            // materialList.appendChild(clone);
+
+            })
+            .catch(error => {
+                console.error("An error occurred while loading the materials for the earbud:",error);
+                alert('An error occurred while loading the materials for the earbud. Please try again later.');
+            });
+            }
+            getData();
+        }
+        loadMaterialInfo();
+
+    function showInfo() {
+        let selected = document.querySelector(`#${this.slot}`);
+        gsap.to(selected, 1, { autoAlpha: 1 });
+    }
+
+    function hideInfo() {
+        let selected = document.querySelector(`#${this.slot}`);
+        gsap.to(selected, 1, { autoAlpha: 0 });
+    }
+    
+
+    //Event listeners
+    model.addEventListener("load", modelLoaded);
+
+    hotspots.forEach(function (hotspot) {
+        hotspot.addEventListener("mouseenter", showInfo);
+        hotspot.addEventListener("mouseleave", hideInfo);
+    });
+
 })();
